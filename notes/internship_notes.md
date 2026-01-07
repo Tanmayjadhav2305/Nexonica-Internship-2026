@@ -1,31 +1,37 @@
-# Internship Notes
+# 🚀 Internship Notes – API, Flask & Core CS Concepts
 
-## API – Application Programming Interface
+## 📌 API – Application Programming Interface
 
-API stands for Application Programming Interface.
+API (Application Programming Interface) is a bridge that allows two different software systems to communicate with each other.
 
-It is used to connect:
-- Mobile Interface
-- Web Interface
+### 🔗 Why APIs are Used?
 
-These interfaces are connected through APIs.
+APIs are used to connect:
 
-### Technologies Used for API Development
+- 📱 Mobile Applications
+- 🌐 Web Applications
+- 🖥️ Backend Services
 
-- Python (Flask)
-- Django
-- Java (Spring Boot)
+These systems exchange data through APIs in a structured manner.
+
+### 🛠️ Technologies Used for API Development
+
+- Python – Flask
+- Python – Django
+- Java – Spring Boot
+- JavaScript – Node.js
+- JavaScript – Express.js
 - PHP
-- Express.js
-- Node.js
 
-### Data Formats
+### 📦 Data Formats Used in APIs
 
-APIs exchange data using:
-- JSON
-- XML
+APIs exchange data using standard formats:
 
-**Example (JSON):**
+- **JSON (JavaScript Object Notation)** – Most commonly used
+- **XML (Extensible Markup Language)**
+
+#### Example (JSON)
+
 ```json
 {
   "name": "tj"
@@ -34,51 +40,225 @@ APIs exchange data using:
 
 ---
 
-## ORM – Object Relational Mapping
+## 🗄️ ORM – Object Relational Mapping
 
-ORM stands for Object Relational Mapping.
+ORM (Object Relational Mapping) is a technique that connects:
 
-It is used to manage the relationship between objects and database tables.
+- Object-oriented programming languages
+- Relational databases
 
----
+### ✅ Benefits of ORM
 
-## HTTP
+- Converts database tables into objects
+- Reduces SQL queries
+- Improves code readability and maintainability
 
-- **Default HTTP port number:** 80
-- **Purpose:** HTTP is used for communication between client and server
-
----
-
-## API Testing Tool
-
-- **Thunder Client**
+**Examples:**
+- SQLAlchemy (Python)
+- Hibernate (Java)
 
 ---
 
-## HTTP Commands (Methods)
+## 🌐 HTTP – HyperText Transfer Protocol
 
-- **GET** – Retrieve data
-- **POST** – Insert data
-- **PUT** – Update data
-- **PATCH** – Partial update
+HTTP is used for communication between client and server.
+
+- **Default HTTP Port:** 80
+- **Purpose:** Transfer data over the web
 
 ---
 
-## Flask Installation Command
+## 🧪 API Testing Tool
 
+**Thunder Client** (VS Code Extension)
+
+Used to test:
+- API requests
+- Responses
+- Headers
+- Status codes
+
+---
+
+## 🔁 HTTP Methods (Commands)
+
+| Method | Description |
+|--------|-------------|
+| GET | Retrieve data |
+| POST | Insert data |
+| PUT | Update complete data |
+| PATCH | Partial update |
+
+---
+
+## ⚙️ Flask Installation
+
+### Step 1: Check Python Installation
+```bash
+python --version
+```
+
+### Step 2: Install Flask
 ```bash
 pip install flask
 ```
 
+### Step 3: Verify Flask Installation
+```bash
+flask --version
+```
+
 ---
 
-## QUESTIONS
+## 🔐 Session Management in Flask (Session Project)
 
-### 1. What is meant by API?
+Sessions allow storing user-specific data across multiple requests.
 
-API (Application Programming Interface) is a mechanism that allows different software applications to communicate with each other.
+### 🔑 Steps to Create Sessions in Flask
 
-### 2. How to install Flask library (Steps)
+#### Step 1: Import Required Modules
+```python
+from flask import Flask, session
+```
+
+#### Step 2: Set Secret Key
+```python
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+```
+
+#### Step 3: Store Data in Session
+```python
+@app.route('/login', methods=['POST'])
+def login():
+    session['username'] = 'john_doe'
+    session['user_id'] = 123
+    return 'Session created'
+```
+
+#### Step 4: Access Session Data
+```python
+@app.route('/dashboard')
+def dashboard():
+    if 'username' in session:
+        return f"Welcome {session['username']}"
+    return 'Not logged in'
+```
+
+#### Step 5: Clear Session
+```python
+@app.route('/logout')
+def logout():
+    session.clear()
+    return 'Logged out'
+```
+
+### 🔍 Key Features of Flask Sessions
+
+- Server-side session handling
+- Client stores session ID in cookies
+- Automatic data serialization
+- Secure encryption using secret key
+- Supports session expiration
+
+---
+
+## ⚠️ Exception Handling
+
+Exception handling prevents program crashes and ensures smooth execution.
+
+### Components:
+
+- **try** – Code that may cause an error
+- **catch** – Handles exception
+- **throw** – Raises an exception manually
+- **finally** – Always executes
+
+#### Example:
+```python
+try:
+    result = 10 / 0
+except ZeroDivisionError as e:
+    print(f"Error: {e}")
+finally:
+    print("Cleanup completed")
+```
+
+---
+
+## 🧠 Memory Size of Data Types
+
+| Data Type | Size (Bytes) |
+|-----------|--------------|
+| int | 4 – 8 |
+| float | 4 |
+| double | 8 |
+| char | 1 – 2 |
+
+---
+
+## 📘 TOC – Theory of Computation
+
+Theory of Computation (TOC) deals with:
+
+- What problems can be solved using computers
+- How efficiently they can be solved
+
+### Core TOC Topics:
+
+- Finite Automata (DFA/NFA)
+- Regular Expressions
+- Context-Free Grammars
+- Pushdown Automata
+- Turing Machines
+- Decidability & Undecidability
+
+---
+
+## 🔒 Final & Static Keywords
+
+### final
+- Prevents modification
+- Stops inheritance or overriding
+
+### static
+- Belongs to the class, not object
+- Shared across all instances
+
+---
+
+## 🔎 Regular Expressions (Pattern Recognition)
+
+Regular Expressions are used to match patterns in text.
+
+### Example Pattern
+```
+[T][0-9]{8}
+```
+
+### Example Match
+```
+T10394756
+```
+
+### 💡 Real-World Use Cases
+
+1. **Shipment Tracking** – Extract tracking numbers from logistics notifications
+2. **Employee ID Validation** – Verify and extract employee tracking IDs
+3. **Transaction Reference Extraction** – Pull transaction references from documents
+4. **Inventory Management** – Extract product/item tracking codes
+5. **Logistics Monitoring** – Track goods movement in supply chain
+6. **Support Ticket Systems** – Extract ticket numbers from support emails
+
+---
+
+## ❓ Interview Questions
+
+### 1️⃣ What is an API?
+
+An API is a mechanism that allows different software applications to communicate and exchange data with each other.
+
+### 2️⃣ How to Install Flask?
 
 **Step 1:** Check Python installation
 ```bash
@@ -97,140 +277,4 @@ flask --version
 
 ---
 
-## SESSION PROJECT
-
-### Session Management in Flask
-
-Sessions are used to store user-specific data across multiple requests. In Flask, sessions allow you to maintain state for individual users.
-
-#### How Sessions are Created in Python Flask
-
-**Step 1: Import Flask and session**
-```python
-from flask import Flask, session
-```
-
-**Step 2: Set secret key (required for session encryption)**
-```python
-app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Must be set for sessions to work
-```
-
-**Step 3: Store data in session**
-```python
-@app.route('/login', methods=['POST'])
-def login():
-    session['username'] = 'john_doe'  # Store user data
-    session['user_id'] = 123
-    return 'Session created'
-```
-
-**Step 4: Access session data**
-```python
-@app.route('/dashboard')
-def dashboard():
-    if 'username' in session:
-        username = session['username']  # Retrieve stored data
-        return f'Welcome {username}'
-    return 'Not logged in'
-```
-
-**Step 5: Clear/delete session**
-```python
-@app.route('/logout')
-def logout():
-    session.clear()  # Clears all session data
-    return 'Logged out'
-```
-
-#### Key Features of Flask Sessions
-
-- **Server-side storage:** Session data is stored on the server
-- **Client-side cookies:** Session ID is sent to client as a cookie
-- **Automatic serialization:** Flask automatically converts Python objects to JSON
-- **Expiration:** Sessions expire based on timeout settings
-- **Encryption:** Data is encrypted using the secret key
-
-#### Example: Complete Session Implementation
-
-```python
-from flask import Flask, session, redirect, url_for
-
-app = Flask(__name__)
-app.secret_key = 'secret123'
-
-@app.route('/set-session')
-def set_session():
-    session['user'] = 'Alice'
-    session['role'] = 'admin'
-    return 'Session set'
-
-@app.route('/get-session')
-def get_session():
-    user = session.get('user', 'Guest')
-    return f'Current user: {user}'
-
-@app.route('/delete-session')
-def delete_session():
-    session.pop('user', None)
-    return 'Session cleared'
-```
-
----
-
-### Exception Handling
-
-Exception handling is used to gracefully manage runtime errors and prevent program crashes.
-
-#### Try-Catch-Throw-Finally Block
-
-- **try:** Code that might throw an exception
-- **catch:** Handles the exception if one occurs
-- **throw:** Used to explicitly throw an exception
-- **finally:** Block that executes regardless of exception
-
----
-
-### Memory Size for Data Types
-
-| Data Type | Size (in bytes) |
-|-----------|-----------------|
-| int       | 4-8             |
-| float     | 4               |
-| double    | 8               |
-| char      | 1-2             |
-
----
-
-### Table of Contents (TOC) Concepts
-
-TOC represents the main topics or sections within a document or module for easy navigation.
-
----
-
-### Final and Static Keywords
-
-- **final:** Prevents modification, overriding, or inheritance
-- **static:** Class-level members shared across all instances
-
----
-
-### Pattern Recognition: Regular Expressions
-
-Regular expressions (RE) are patterns for matching and extracting data.
-
-#### Example: Tracking ID Pattern
-
-**Pattern:** `[T][0-9]{8}`
-**Example:** T10394756
-
-#### Use Cases
-
-1. **Shipment Tracking** � Track packages
-2. **Employee ID Validation** � Verify IDs
-3. **Transaction ID Extraction** � Extract references
-4. **Inventory Management** � Track products
-5. **Logistics Systems** � Monitor goods
-6. **Support Tickets** � Extract ticket numbers
-
-````
+*Last Updated: January 7, 2026*
