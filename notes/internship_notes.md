@@ -277,4 +277,176 @@ flask --version
 
 ---
 
-*Last Updated: January 7, 2026*
+## 🧠 OpenCV Internship Notes – Core Image Processing (Practical)
+
+### 1. Image & Pixel Basics (OpenCV View)
+
+An image in OpenCV is a NumPy array.
+
+```python
+img = cv2.imread("image.jpeg")
+```
+
+**Type:** `numpy.ndarray`
+
+**Shape:** `(height, width, channels)`
+
+```python
+h, w, c = img.shape
+```
+
+---
+
+### 2. Pixel Coordinate System
+
+OpenCV uses a matrix-style coordinate system:
+
+- **Origin** → top-left corner
+- **Access pattern** → `img[y][x]`
+- **x increases** → right
+- **y increases** → downward
+
+**Important Coordinates**
+
+| Location | Coordinate |
+|----------|-----------|
+| Top-left | (0, 0) |
+| Top-right | (w-1, 0) |
+| Bottom-left | (0, h-1) |
+| Bottom-right | (w-1, h-1) |
+
+**Reason for -1:** indexing starts at 0.
+
+---
+
+### 3. Color Channels (BGR / ARGB)
+
+**BGR in OpenCV**
+
+OpenCV stores color images in BGR order.
+
+```python
+b, g, r = img[y][x]
+```
+
+Each channel:
+- **Range:** 0 → 255
+- **Total values:** 256
+
+**ARGB (32-bit Pixel)**
+
+| Channel | Bits |
+|---------|------|
+| Alpha | 8 |
+| Red | 8 |
+| Green | 8 |
+| Blue | 8 |
+
+Total = 32 bits per pixel
+
+Used mainly in images with transparency (PNG).
+
+---
+
+### 4. Bit Depth
+
+**8-bit per channel**
+
+$2^8 = 256$ intensity values
+
+| Image Type | Bits per Pixel |
+|-----------|----------------|
+| Grayscale | 8 |
+| RGB | 24 |
+| ARGB | 32 |
+
+---
+
+### 5. Grayscale Conversion (Manual)
+
+Grayscale removes color information and keeps intensity only.
+
+**Logic Used**
+
+$$\text{Gray} = \frac{R + G + B}{3}$$
+
+**Implementation**
+
+```python
+avg = (int(b) + int(g) + int(r)) // 3
+img2[y][x] = (avg, avg, avg)
+```
+
+**Key Insight:** When R = G = B, the pixel appears gray.
+
+---
+
+### 6. Binarization (Black & White)
+
+Binarization converts a grayscale image into only two values:
+
+- **Black** → 0
+- **White** → 255
+
+**Threshold Logic**
+
+```python
+if avg > 127:
+    img2[y][x] = (255, 255, 255)
+else:
+    img2[y][x] = (0, 0, 0)
+```
+
+Threshold 127 is a mid-point; adjustable based on lighting.
+
+---
+
+### 7. Color Filtering (Red / Green / Blue)
+
+Used to isolate individual color channels.
+
+**Example: Red Filter**
+
+```python
+img2[y][x] = (0, 0, r)
+```
+
+Similarly:
+- **Green** → `(0, g, 0)`
+- **Blue** → `(b, 0, 0)`
+
+---
+
+### 8. Mirror Image (Flip)
+
+**Horizontal Mirror (Left ↔ Right)**
+
+```python
+img2[y][w - 1 - x] = img[y][x]
+```
+
+**Vertical Mirror (Top ↔ Bottom)**
+
+```python
+img2[h - 1 - y][x] = img[y][x]
+```
+
+---
+
+### 9. Image Rotation (Manual)
+
+**90° Clockwise Rotation**
+
+Mapping: $(y, x) → (x, h - 1 - y)$
+
+```python
+img2 = np.zeros((w, h, c), dtype=np.uint8)
+
+for y in range(h):
+    for x in range(w):
+        img2[x][h - 1 - y] = img[y][x]
+```
+
+---
+
+*Last Updated: January 9, 2026*
